@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chá & Encantos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="brand">
+            <img src="flor-logo.png" alt="Logo de flor Chá & Encantos" class="brand-logo">
+            <div class="brand-text">
+                <h1>Chá & Encantos</h1>
+                <p>Infusões com alma</p>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <a href="index.html">Início</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="catalogo.html">Chás</a>
+        <a href="contato.html">Contato</a>
+    </nav>
+
+    <section id="home" class="hero">
+        <h2>Bem-vindo ao Chá & Encantos</h2>
+        <p>Onde cada infusão carrega uma história</p>
+    </section>
+
+    <section id="sobre">
+        <h2>Nossa História</h2>
+        <p>Olá! Meu nome é Aurora, e sou apaixonada por chás.</p>
+        <p>Depois de anos estudando plantas medicinais, viajando pelo interior do Brasil e aprendendo com mestres da natureza, decidi abrir um pequeno espaço chamado <strong>Chá & Encantos</strong>.</p>
+        <p>Não é apenas uma loja de chás, é um lugar onde cada infusão carrega uma história.</p>
+    </section>
+
+    <section id="catalogo">
+        <h2>Nossos Chás</h2>
+        
+        <div class="cha-grid">
+            <div class="cha-card" data-profile="quente">
+                <h3>Camomila Serenidade</h3>
+                <p><em>Calmante</em></p>
+                <p>Flores de camomila pura, colhidas ao amanhecer. Ideal para relaxar após um longo dia.</p>
+                <p class="preco">R$ 18,00</p>
+            </div>
+
+            <div class="cha-card" data-profile="frio">
+                <h3>Hibisco Vermelho</h3>
+                <p><em>Energizante</em></p>
+                <p>Rico em antioxidantes, ajuda na digestão e traz energia natural.</p>
+                <p class="preco">R$ 22,00</p>
+            </div>
+
+            <div class="cha-card" data-profile="frio">
+                <h3>Hortelã do Campo</h3>
+                <p><em>Digestivo</em></p>
+                <p>Folhas frescas de hortelã orgânica. Perfeito após as refeições.</p>
+                <p class="preco">R$ 16,00</p>
+            </div>
+
+            <div class="cha-card" data-profile="quente">
+                <h3>Capim-Santo</h3>
+                <p><em>Calmante</em></p>
+                <p>Aroma cítrico suave, propriedades relaxantes e digestivas.</p>
+                <p class="preco">R$ 15,00</p>
+            </div>
+
+            <div class="cha-card" data-profile="frio">
+                <h3>Chá Verde Puro</h3>
+                <p><em>Energizante</em></p>
+                <p>Fonte de energia e antioxidantes. Estimula o metabolismo.</p>
+                <p class="preco">R$ 25,00</p>
+            </div>
+
+            <div class="cha-card" data-profile="quente">
+                <h3>Gengibre com Limão</h3>
+                <p><em>Medicinal</em></p>
+                <p>Fortalece a imunidade, alivia dores e aquece o corpo.</p>
+                <p class="preco">R$ 20,00</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="recomendacao-clima" class="weather-recommendation">
+        <h2>Recomendação do Dia</h2>
+        <div id="weather-widget" class="weather-widget">
+            <p class="weather-status">Verificando clima da sua região...</p>
+        </div>
+    </section>
+
+    <section id="contato">
+        <h2>Entre em Contato</h2>
+        
+        <form>
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required>
+            
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="mensagem">Mensagem:</label>
+            <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
+            
+            <button type="submit">Enviar</button>
+        </form>
+
+        <div class="info-contato">
+            <p><strong>WhatsApp:</strong> (XX) XXXXX-XXXX</p>
+            <p><strong>E-mail:</strong> contato@chaencantos.com.br</p>
+            <p><strong>Horário:</strong> Seg a Sex: 9h às 18h</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Chá & Encantos - Todos os direitos reservados</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
