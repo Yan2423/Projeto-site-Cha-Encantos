@@ -4,8 +4,10 @@ const form = document.querySelector("form");
 const nomeInput = document.getElementById("nome");
 const emailInput = document.getElementById("email");
 const mensagemInput = document.getElementById("mensagem");
+const filtro = document.getElementById("filtro")
 
-function showError(message) {
+
+function showWeatherError(message) {
     weatherWidget.innerHTML = `<p class="weather-status">${message}</p>`;
 }
 
@@ -73,7 +75,7 @@ function renderRecommendation(temp) {
 
 function init() {
     if (!navigator.geolocation) {
-        showError("Seu navegador nao suporta geolocalizacao.");
+        showWeatherError("Seu navegador nao suporta geolocalizacao.");
         return;
     }
 
@@ -83,10 +85,10 @@ function init() {
                 const temp = await loadWeather(coords.latitude, coords.longitude);
                 renderRecommendation(temp);
             } catch (error) {
-                showError("Nao foi possivel carregar o clima agora.");
+                showWeatherError("Nao foi possivel carregar o clima agora.");
             }
         },
-        () => showError("Permita localizacao para receber recomendacoes do clima."),
+        () => showWeatherError("Permita localizacao para receber recomendacoes do clima."),
         { timeout: 10000 }
     );
 }
@@ -120,6 +122,10 @@ function validateEmail(email) {
 
 function validateForm(e) {
     let isValid = true;
+
+    if (!nomeInput || !emailInput || !mensagemInput) {
+        return;
+    }
 
     if (!nomeInput.value.trim()) {
         showError(nomeInput, "Nome é obrigatório.");
@@ -155,4 +161,26 @@ function validateForm(e) {
     }
 }
 
-form.addEventListener("submit", validateForm);
+if (form) {
+    form.addEventListener("submit", validateForm);
+}
+
+filtro.addEventListener("change", () => {
+
+    const valorSelecionado = filtro.value;
+
+    teaCards.forEach(card =>{
+
+        const preco = Number(card.dataset.price)
+
+        if(valorSelecionado === "todos"){
+            card.style.display = "block";
+        }
+        else if (preco <= Number(valorSelecionado)){
+            card.style.display = "block";
+        }
+        else{
+            card.style.display = "none";
+        }
+    });
+});
