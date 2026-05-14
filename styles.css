@@ -283,3 +283,136 @@ footer {
     display: block;
     margin-bottom: 5px;
 }
+
+        /* Estilos extras específicos da página de kits */
+        .kits-section {
+            background-color: #FAF8F3;
+        }
+        .kit-builder, .assinatura-planos {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            margin-bottom: 40px;
+            border: 1px solid #e6b7c2;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .kit-builder h3, .assinatura-planos h3 {
+            color: #6B8E23;
+            border-left: 5px solid #e16a8d;
+            padding-left: 15px;
+            margin-bottom: 20px;
+        }
+        .cha-checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .cha-checkbox-item {
+            background: #fff7f9;
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid #f3bdcc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .cha-checkbox-item label {
+            font-weight: normal;
+            margin: 0;
+            cursor: pointer;
+            flex: 1;
+        }
+        .cha-checkbox-item input {
+            width: auto;
+            margin-left: 10px;
+            transform: scale(1.1);
+        }
+        .quantidade-input {
+            width: 70px;
+            padding: 5px;
+            text-align: center;
+            margin-left: 10px;
+        }
+        .preco-total {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #8B4513;
+            text-align: right;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px dashed #D4A574;
+        }
+        .btn-kit {
+            background-color: #6B8E23;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 10px;
+            width: 100%;
+        }
+        .btn-kit:hover {
+            background-color: #557020;
+            transform: scale(0.98);
+        }
+        .planos-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .plano-card {
+            background: #fffdfd;
+            border: 2px solid #D4A574;
+            border-radius: 20px;
+            padding: 20px;
+            flex: 1;
+            min-width: 220px;
+            text-align: center;
+            transition: 0.2s;
+        }
+        .plano-card:hover {
+            border-color: #e16a8d;
+            box-shadow: 0 6px 14px rgba(225,106,141,0.15);
+        }
+        .plano-card h4 {
+            font-size: 1.6em;
+            color: #7a2f45;
+            margin-bottom: 10px;
+        }
+        .plano-preco {
+            font-size: 2em;
+            font-weight: bold;
+            color: #6B8E23;
+            margin: 15px 0;
+        }
+        .plano-desc {
+            color: #555;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+        .btn-assinar {
+            background-color: #e16a8d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .btn-assinar:hover {
+            background-color: #c24b6e;
+        }
+        @media (max-width: 768px) {
+            .cha-checkbox-grid {
+                grid-template-columns: 1fr;
+            }
+            .planos-container {
+                flex-direction: column;
+            }
+        }
