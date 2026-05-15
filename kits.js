@@ -19,7 +19,7 @@
             { nome: "Maracujá Calmante", preco: 20 }
         ];
 
-        // Renderiza a lista com checkbox + quantidade
+
         const container = document.getElementById("lista-chas-kit");
         let selecionados = {}; 
 
@@ -92,7 +92,7 @@
             alert(mensagem + "\n\nPara agilizar, envie 'Quero assinar' para nosso WhatsApp (XX) XXXXX-XXXX.");
         }
 
-        // Inicialização
+      
         renderizarListaChas();
         document.getElementById("montarKitBtn").addEventListener("click", montarKit);
         document.querySelectorAll(".btn-assinar").forEach(btn => {
