@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chá & Encantos</title>
-    <link rel="stylesheet" href="styles.css">
-    <title>Document</title>
+    <title>Contato - Chá & Encantos</title>
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
-     <header>
+    <header>
         <div class="brand">
-            <img src="flor-logo.png" alt="Logo de flor Chá & Encantos" class="brand-logo">
+            <img src="../assets/flor-logo.png" alt="Logo de flor Chá & Encantos" class="brand-logo">
             <div class="brand-text">
                 <h1>Chá & Encantos</h1>
                 <p>Infusões com alma</p>
@@ -18,28 +17,31 @@
         </div>
     </header>
 
-   <nav>
+    <nav>
         <a href="index.html">Início</a>
         <a href="sobre.html">Sobre</a>
         <a href="catalogo.html">Chás</a>
         <a href="kits.html">Kits & Assinaturas</a>
         <a href="contato.html">Contato</a>
     </nav>
-   <section id="contato">
+
+    <section id="contato">
         <h2>Entre em Contato</h2>
-        
-        <form>
+
+        <form id="formContato">
             <label for="nome">Nome:</label>
             <input type="text" id="nome" name="nome" required>
-            
+
             <label for="email">E-mail:</label>
             <input type="email" id="email" name="email" required>
-            
+
             <label for="mensagem">Mensagem:</label>
             <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
-            
-            <button type="submit">Enviar</button>
+
+            <button type="submit">Enviar Mensagem</button>
         </form>
+
+        <div id="formFeedback" style="margin-top: 20px; text-align: center;"></div>
 
         <div class="info-contato">
             <p><strong>WhatsApp:</strong> (XX) XXXXX-XXXX</p>
@@ -51,7 +53,7 @@
     <footer>
         <p>&copy; 2024 Chá & Encantos - Todos os direitos reservados</p>
     </footer>
-    <script src="script.js"></script>
-    
+
+    <script src="../js/script.js"></script>
 </body>
 </html>

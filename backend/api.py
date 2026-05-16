@@ -9,7 +9,7 @@ CORS(app)  # Permite requisições do seu frontend
 
 db = Database()
 
-# ==================== ROTAS DA API ====================
+# ROTAS DA API 
 
 @app.route('/api/health', methods=['GET'])
 def health_check():
