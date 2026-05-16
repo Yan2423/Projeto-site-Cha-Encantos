@@ -23,8 +23,7 @@ cha-encantos/
 │   ├── cha_encantos.db
 │   └── requirements.txt
 │
-├── frontend/
-│   ├── pages/
+├── docs/
 │   │   ├── index.html
 │   │   ├── sobre.html
 │   │   ├── catalogo.html
