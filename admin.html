@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Admin - Chá & Encantos</title>
+    <link rel="stylesheet" href="ADMstyles.css">
+    <style>
+       
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🍵 Painel Administrativo - Chá & Encantos</h1>
+            <p>Gerencie as mensagens recebidas do site</p>
+        </header>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number" id="totalMensagens">0</div>
+                <div class="stat-label">Total de Mensagens</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="naoLidas">0</div>
+                <div class="stat-label">Não Lidas</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="lidas">0</div>
+                <div class="stat-label">Lidas</div>
+            </div>
+        </div>
+        
+        <div class="filtros">
+            <button onclick="carregarMensagens()" class="active">Todas</button>
+            <button onclick="carregarMensagens('nao_lida')">Não Lidas</button>
+            <button onclick="carregarMensagens('lida')">Lidas</button>
+        </div>
+        
+        <div id="mensagensContainer">
+            <div class="loading">Carregando mensagens...</div>
+        </div>
+    </div>
+    
+    <script>
+        const API_URL = 'http://localhost:5000/api';
+        let mensagensAtuais = [];
+        
+        // Carregar estatísticas
+        async function carregarEstatisticas() {
+            try {
+                const response = await fetch(`${API_URL}/admin/estatisticas`);
+                const resultado = await response.json();
+                
+                if (resultado.success) {
+                    document.getElementById('totalMensagens').textContent = resultado.data.total;
+                    document.getElementById('naoLidas').textContent = resultado.data.nao_lidas;
+                    document.getElementById('lidas').textContent = resultado.data.lidas;
+                }
+            } catch (error) {
+                console.error('Erro ao carregar estatísticas:', error);
+            }
+        }
+        
+        // Carregar mensagens
+        async function carregarMensagens(status = null) {
+            const container = document.getElementById('mensagensContainer');
+            container.innerHTML = '<div class="loading">Carregando mensagens...</div>';
+            
+            try {
+                let url = `${API_URL}/admin/mensagens`;
+                if (status) {
+                    url += `?status=${status}`;
+                }
+                
+                const response = await fetch(url);
+                const resultado = await response.json();
+                
+                if (resultado.success) {
+                    mensagensAtuais = resultado.data;
+                    exibirMensagens(resultado.data);
+                } else {
+                    container.innerHTML = '<div class="loading">Erro ao carregar mensagens</div>';
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                container.innerHTML = '<div class="loading">Erro de conexão com a API</div>';
+            }
+            
+            // Atualizar estatísticas
+            carregarEstatisticas();
+            
+            // Atualizar estilo dos botões
+            document.querySelectorAll('.filtros button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event?.target.classList.add('active');
+        }
+        
+        // Exibir mensagens
+        function exibirMensagens(mensagens) {
+            const container = document.getElementById('mensagensContainer');
+            
+            if (mensagens.length === 0) {
+                container.innerHTML = '<div class="loading">Nenhuma mensagem encontrada</div>';
+                return;
+            }
+            
+            container.innerHTML = mensagens.map(msg => `
+                <div class="mensagem-card ${msg.status}">
+                    <div class="mensagem-header">
+                        <div>
+                            <div class="mensagem-nome">${escapeHtml(msg.nome)}</div>
+                            <div class="mensagem-email">${escapeHtml(msg.email)}</div>
+                        </div>
+                        <div class="mensagem-data">
+                            ${formatarData(msg.created_at)}
+                            ${msg.status === 'nao_lida' ? ' <span style="color: #e16a8d;">● Não lida</span>' : ' <span style="color: #6B8E23;">✓ Lida</span>'}
+                        </div>
+                    </div>
+                    <div class="mensagem-conteudo">
+                        ${escapeHtml(msg.mensagem)}
+                    </div>
+                    <div class="mensagem-acoes">
+                        ${msg.status === 'nao_lida' ? `
+                            <button class="btn btn-marcar" onclick="marcarComoLida(${msg.id})">
+                                ✓ Marcar como lida
+                            </button>
+                        ` : ''}
+                        <button class="btn btn-deletar" onclick="deletarMensagem(${msg.id})">
+                            🗑️ Deletar
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Marcar mensagem como lida
+        async function marcarComoLida(id) {
+            try {
+                const response = await fetch(`${API_URL}/admin/mensagens/${id}/marcar-lida`, {
+                    method: 'PUT'
+                });
+                const resultado = await response.json();
+                
+                if (resultado.success) {
+                    carregarMensagens();
+                } else {
+                    alert('Erro ao marcar mensagem como lida');
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                alert('Erro de conexão');
+            }
+        }
+        
+        // Deletar mensagem
+        async function deletarMensagem(id) {
+            if (!confirm('Tem certeza que deseja deletar esta mensagem?')) {
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_URL}/admin/mensagens/${id}`, {
+                    method: 'DELETE'
+                });
+                const resultado = await response.json();
+                
+                if (resultado.success) {
+                    carregarMensagens();
+                } else {
+                    alert('Erro ao deletar mensagem');
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                alert('Erro de conexão');
+            }
+        }
+        
+        // Funções auxiliares
+        function formatarData(dataString) {
+            const data = new Date(dataString);
+            return data.toLocaleString('pt-BR');
+        }
+        
+        function escapeHtml(texto) {
+            const div = document.createElement('div');
+            div.textContent = texto;
+            return div.innerHTML;
+        }
+        
+        // Carregar dados ao iniciar
+        carregarMensagens();
+    </script>
+</body>
+</html>
